@@ -12,13 +12,23 @@ class BaseModel:
     This class defines all common attributes and methods for other classes
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """
         This is the constructor method
         """
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        str_format = "%Y-%m-%dT%H:%M:%S.%f"
+        lst = ["updated_at", "created_at"]
+        if kwargs:
+            for key, value in kwargs.items():
+                if key != "__class__":
+                    if key in lst:
+                        setattr(self, key, datetime.strptime(value, str_format))
+                    else:
+                        setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
 
     def __str__(self):
         """
@@ -36,9 +46,10 @@ class BaseModel:
         """
         This method returns a dictionary of an instance
         """
+        dict_copy = self.__dict__.copy()
         cls_name = self.__class__.__name__
-        self.created_at = self.created_at.isoformat()
-        self.updated_at = self.updated_at.isoformat()
+        dict_copy["created_at"] = self.created_at.isoformat()
+        dict_copy["updated_at"] = self.updated_at.isoformat()
 
-        self.__dict__['__class__'] = cls_name
-        return self.__dict__
+        dict_copy['__class__'] = cls_name
+        return dict_copy
