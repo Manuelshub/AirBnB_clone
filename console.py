@@ -5,7 +5,6 @@ This module contains entry point of a command interpreter
 import cmd
 
 
-
 class HBNBCommand(cmd.Cmd):
     """
     A class that is the entry point of a command interpreter
@@ -21,6 +20,9 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program"""
         return True
 
+    def do_create(self, arg):
+        """Creates an instance of a class"""
+        
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
