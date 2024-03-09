@@ -4,6 +4,7 @@ This module contains a class BaseModel that defines all common attributes
 and methods for other classes.
 """
 from datetime import datetime
+import models
 import uuid
 
 
