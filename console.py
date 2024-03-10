@@ -99,7 +99,7 @@ class HBNBAmenity:
         if self.storage.all().get(key) is None:
             print("** no instance found **")
             return
-        self.storage.all().pop(key)
+        del self.storage.all()[key]
         self.storage.save()
 
     def discard_model_by_id(self, model, cls_id):
