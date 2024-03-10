@@ -230,9 +230,13 @@ class HBNBCommand(cmd.Cmd):
                 return
         return self.bnbAmenity.discard_model_by_id(model, cls_id)
 
-    def do_all(self, *arg):
+    def do_all(self, arg):
         """Prints all string rep of all instances"""
-        args = (str(arg[0]).split(' '))
+        if not arg:
+            lst = self.bnbAmenity.storage.all().values()
+            print([str(i) for i in lst])
+            return
+        args = (str(arg).split(' '))
         res = self.bnbAmenity.get_all(args[0])
         if res and len(res) > 0:
             print(res)
