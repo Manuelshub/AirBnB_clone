@@ -2,6 +2,7 @@
 """
 This module contains entry point of a command interpreter
 """
+import ast
 import cmd
 from datetime import datetime
 from importlib import import_module
@@ -245,7 +246,7 @@ class HBNBCommand(cmd.Cmd):
             cls_name = args[0]
             cls_id = args[1]
             attr = args[2]
-            val = args[3]
+            val = ast.literal_eval(args[3])
         except (ValueError, IndexError):
             if cls_name is None or len(cls_name) == 0:
                 print("** class name missing **")
