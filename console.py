@@ -23,7 +23,7 @@ class HBNBUtility:
         try:
             module = import_module(root + '.' + mod_name)
             return module
-        except(AttributeError, ModuleNotFoundError):
+        except (AttributeError, ModuleNotFoundError):
             return None
 
     @staticmethod
