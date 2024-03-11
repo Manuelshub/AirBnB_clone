@@ -91,6 +91,18 @@ class TestBaseModel_instantiating(unittest.TestCase):
         self.assertNotIsInstance(self.bm3.updated_at, str)
         self.assertIsInstance(self.bm3.updated_at, datetime)
 
+    def test_str_representation(self):
+        date = datetime.today()
+        dt_repr = repr(date)
+        bm = BaseModel()
+        bm.id = "123456"
+        bm.created_at = bm.updated_at = date
+        bmstr = bm.__str__()
+        self.assertIn("[BaseModel] (123456)", bmstr)
+        self.assertIn("'id': '123456'", bmstr)
+        self.assertIn("'created_at': " + dt_repr, bmstr)
+        self.assertIn("'updated_at': " + dt_repr, bmstr)
+
 
 class TestBaseModel_save(unittest.TestCase):
     """Unittests for testing save method of BaseModel"""
