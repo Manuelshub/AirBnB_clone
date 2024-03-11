@@ -226,7 +226,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** class name missing **")
                 return
             if cls_id is None or len(cls_id) == 0:
-                print("** instance id  missing **")
+                print("** instance id missing **")
                 return
         return self.bnbAmenity.discard_model_by_id(model, cls_id)
 
